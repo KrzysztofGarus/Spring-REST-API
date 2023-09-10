@@ -33,14 +33,24 @@ public class BookController {
     @ResponseBody
     public Book getBookById(@PathVariable Long id){
         return this.bookService.get(id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "entity not found"
+                HttpStatus.NOT_FOUND, "Book not found"
         ));
     }
-
 
     @PostMapping("")
     public void addBook(@RequestBody Book book) {
         bookService.add(book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        bookService.delete(id);
+    }
+
+    @PutMapping("")
+    @ResponseBody
+    public void updateBook(@RequestBody Book book){
+        bookService.update(book);
     }
 
 }
